@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS-Search</title>
+    <link rel="stylesheet" href="_estilo/estilo.css">
+</head>
+
+<body>
+    <header>
+        <!-- Importação do Tensorflow (Versão mais recente) -->
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+        <!-- Importa o Script responsável por carregar os modelos -->
+        <script src="_scripts/model.js" type="module"></script>
+        <!-- Funções de botões e disparidades -->
+        <script src="_scripts/load.js"></script>
+        <img src="_images/logo.png" alt="Logo do PathoSpotter-Search.">
+    </header>
+    <section>
+        <div id="usrlbl">
+            <p>Bem-vindo ao PathoSpotter-Search <br>
+                Por favor, selecione o seu diretório.
+            </p>
+        </div>
+        <div id="dir-div">
+            <input type="file" name="dirsel" id="dir" webkitdirectory directory multiple /><br><br>
+            <input type="button" value="Processar Diretório" onclick="generate_db()">
+        </div>
+        <div id="file-div">
+
+        </div>
+    </section>
+    <footer>
+        <p>&copy; Laboratório de Computação de Alto Desempenho</p>
+    </footer>
+</body>
+
+</html>

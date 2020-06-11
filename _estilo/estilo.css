@@ -1,0 +1,26 @@
+body{
+    background: white;
+    font: normal 12pt courier;
+    text-align: center;
+}
+header{
+    color: black;
+    text-align: center;
+}
+section{
+    background: whitesmoke;
+    border-radius: 10px;
+    padding: 10px;
+    width: 400px;
+    margin: auto;
+    box-shadow: 5px 5px 5px grey;
+}
+footer{
+    color: black;
+    text-align: center;
+    font-style: italic;
+    font-size: 8pt;
+}
+div{
+    padding: 10px;
+}
