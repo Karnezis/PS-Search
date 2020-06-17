@@ -19,6 +19,9 @@ function generate_db() {
     search.appendChild(srch);
     search.innerHTML += '<br><br>';
     search.appendChild(srchbttn);
+
+    //Chamando subfunção
+    dirProcess();
 }
 
 function buscar() {
@@ -40,5 +43,29 @@ function buscar() {
         else {
             console.log('Não há suporte.')
         }
+    }
+}
+
+// Testa a preview dos arquivos carregados do diretório
+function handleFiles() {
+    var files = document.getElementById('dir').files; // Pega os arquivos do input
+    var preview = document.getElementById('file-div'); // Pega o div que testa o resultado
+    for (var i = 0; i < files.length; i++) { // Itera a FileList
+        var file = files[i]; // Recebe um único File da lista
+        var imageType = /image.*/;
+
+        if (!file.type.match(imageType)) { // Verifica se é uma imagem
+            continue;
+        }
+
+        // Cria um preview da imagem para teste
+        var img = document.createElement("img");
+        img.classList.add("obj");
+        img.file = file;
+        preview.appendChild(img);
+
+        var reader = new FileReader();
+        reader.onload = (function (aImg) { return function (e) { aImg.src = e.target.result; }; })(img);
+        reader.readAsDataURL(file);
     }
 }
