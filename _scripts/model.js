@@ -3,5 +3,5 @@ async function load_Models() {
     //Carrega os modelos da pasta de modelos, retornando um objeto "tf.Model".
     const psmodel = await tf.loadLayersModel('_models/pspotter/model.json');
     const vggmodel = await tf.loadLayersModel('_models/vgg16ft/model.json');
+    console.log('Modelos carregados.');
 }
-load_Models();

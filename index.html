@@ -13,7 +13,7 @@
         <!-- Importação do Tensorflow (Versão mais recente) -->
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
         <!-- Importa o Script responsável por carregar os modelos -->
-        <script src="_scripts/model.js" type="module"></script>
+        <script async src="_scripts/model.js" onload="load_Models()"></script>
         <!-- Funções de botões e disparidades -->
         <script src="_scripts/load.js"></script>
         <img src="_images/logo.png" alt="Logo do PathoSpotter-Search.">
@@ -26,7 +26,7 @@
         </div>
         <div id="dir-div">
             <input type="file" name="dirsel" id="dir" webkitdirectory directory multiple /><br><br>
-            <input type="button" value="Processar Diretório" onclick="handleFiles()">
+            <input type="button" value="Processar Diretório" onclick="img_resize()">
         </div>
         <div id="file-div">
         </div>
