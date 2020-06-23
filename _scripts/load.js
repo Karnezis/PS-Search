@@ -28,30 +28,6 @@ function buscar() {
     //Função que irá buscar as imagens mais semelhantes.
 }
 
-// Testa a preview dos arquivos carregados do diretório
-function handleFiles() {
-    var files = document.getElementById('dir').files; // Pega os arquivos do input
-    var preview = document.getElementById('file-div'); // Pega o div que testa o resultado
-    for (var i = 0; i < files.length; i++) { // Itera a FileList
-        var file = files[i]; // Recebe um único File da lista
-        var imageType = /image.*/;
-
-        if (!file.type.match(imageType)) { // Verifica se é uma imagem
-            continue;
-        }
-        
-        // Cria um preview da imagem para teste
-        var img = document.createElement("img");
-        img.classList.add("obj");
-        img.file = file;
-        preview.appendChild(img);
-        
-        var reader = new FileReader();
-        reader.onload = (function (aImg) { return function (e) { aImg.src = e.target.result; }; })(img);
-        reader.readAsDataURL(file);
-    }
-}
-
 function img_resize() { //
     var arqvs = document.getElementById('dir').files; // Pega os arquivos do input
     var prev = document.getElementById('file-div'); // Pega o div que testa o resultado
@@ -61,10 +37,10 @@ function img_resize() { //
 
         if (!file.type.match(imageType)) { // Verifica se é uma imagem
             continue; // Se não for, pula o redimensionamento.
-        }else{
+        } else {
             var fileType = file.type;
         }
-        
+
         let reader = new FileReader();  // Redimensionando a Imagem
         reader.onloadend = function () {  // Quando tentar carregar uma imagem
             let image = new Image();  // Faz um novo elemento da classe Imagem
@@ -77,23 +53,20 @@ function img_resize() { //
                 ctx.drawImage(this, 0, 0, 224, 224);  // Desenha a imagem no contexto
                 let finalFile = canvas.toDataURL(fileType);  // O arquivo final é jogado no Canvas
                 // Cria um preview da imagem para teste
-                let img = document.createElement("img");
-                img.classList.add("obj");
-                img.src = finalFile;
-                prev.appendChild(image);
-                prev.appendChild(img);
+                let img = document.createElement("img");  // Cria uma imagem
+                img.classList.add("obj");  // Define a classe como objeto
+                img.src = finalFile; // A imagem recebe o arquivo redimensionado
+                img.width = img.height = 224;
+                prev.appendChild(img);  // Adiciona um preview da imagem
 
-                console.log(`A imagem ${file.name} foi processada. Arquivo ${i} de ${arqvs.length}.`);
+                // Teste de função da vetorização
+                let imagem = ctx.getImageData(0, 0, canvas.height, canvas.width);
+                let x = tf.browser.fromPixels(imagem);
+                getModel(1, x);
+
+                // console.log(`A imagem ${file.name} foi processada. Arquivo ${i} de ${arqvs.length}.`);
             }
         }
         reader.readAsDataURL(file);
-    }
-}
-
-function tensorTest() {
-    var images = document.images;
-    for (let i = 0; i < images.length; i++) {
-        const element = images[i];
-        console.log(`O vetor do Tensorflow é: \n${tf.browser.fromPixels(element)}\n Fim.`);
     }
 }
