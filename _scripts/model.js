@@ -11,9 +11,7 @@ async function getModel(modelNum, image) {
     switch (modelNum) {
         case 1:
             var psmodel = await tf.loadLayersModel('_models/pspotter/model.json');
-            const prediction = psmodel.predict(image_reshaped);
-            tf.cast(prediction, 'float32').print();
-            return prediction;
+            return psmodel.predict(image_reshaped);
             break;
         case 2:
             var vggmodel = await tf.loadLayersModel('_models/vgg16ft/model.json');

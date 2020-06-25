@@ -31,6 +31,8 @@ function buscar() {
 function img_resize() { //
     var arqvs = document.getElementById('dir').files; // Pega os arquivos do input
     var prev = document.getElementById('file-div'); // Pega o div que testa o resultado
+    const val = 255;
+    var tensores = [];
     for (let i = 0; i < arqvs.length; i++) { // Itera a FileList
         let file = arqvs[i]; // Recebe um único File da lista
         let imageType = /image.*/;
@@ -61,12 +63,17 @@ function img_resize() { //
 
                 // Teste de função da vetorização
                 let imagem = ctx.getImageData(0, 0, canvas.height, canvas.width);
-                let x = tf.browser.fromPixels(imagem);
-                getModel(1, x);
-
-                // console.log(`A imagem ${file.name} foi processada. Arquivo ${i} de ${arqvs.length}.`);
+                let inputTensor = tf.browser.fromPixels(imagem);
+                inputTensor.toFloat();
+                inputTensor = inputTensor.div(val);
+                
+                tensores[i] = getModel(1, inputTensor);
+                
+                //console.log(`A imagem ${file.name} foi processada. Arquivo ${i} de ${arqvs.length}.`);
+                //inputTensor.print();
             }
         }
         reader.readAsDataURL(file);
     }
+    console.log(tensores);
 }
