@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="_estilo/estilo.css">
     <!-- Importação do Tensorflow (Versão mais recente) -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    <!-- Importa o Script responsável por carregar os modelos -->
+    <script async src="_scripts/model.js" onload="load_Models()"></script>
+    <!-- Funções de botões e disparidades -->
+    <script src="_scripts/load.js"></script>
 </head>
 
 <body>
     <header>
-        <!-- Importa o Script responsável por carregar os modelos -->
-        <script async src="_scripts/model.js" onload="load_Models()"></script>
-        <!-- Funções de botões e disparidades -->
-        <script src="_scripts/load.js"></script>
         <img src="_images/logo.png" alt="Logo do PathoSpotter-Search.">
     </header>
     <section>

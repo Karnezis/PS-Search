@@ -24,13 +24,8 @@ function generate_db() { //Função que irá gerar um novo dataset para um diret
     dirProcess();
 }
 
-function buscar() {
-    //Função que irá buscar as imagens mais semelhantes.
-}
-
 function img_resize() { //
     var arqvs = document.getElementById('dir').files; // Pega os arquivos do input
-    var prev = document.getElementById('file-div'); // Pega o div que testa o resultado
     const val = 255;
     var tensores = [];
     for (let i = 0; i < arqvs.length; i++) { // Itera a FileList
@@ -53,27 +48,37 @@ function img_resize() { //
                 canvas.height = 224;  // Define a largura do canvas como a desejada
                 let ctx = canvas.getContext("2d");  // Pega o contexto do Canvas
                 ctx.drawImage(this, 0, 0, 224, 224);  // Desenha a imagem no contexto
-                let finalFile = canvas.toDataURL(fileType);  // O arquivo final é jogado no Canvas
-                // Cria um preview da imagem para teste
-                let img = document.createElement("img");  // Cria uma imagem
-                img.classList.add("obj");  // Define a classe como objeto
-                img.src = finalFile; // A imagem recebe o arquivo redimensionado
-                img.width = img.height = 224;
-                prev.appendChild(img);  // Adiciona um preview da imagem
+                canvas.toDataURL(fileType);  // O arquivo final é jogado no Canvas
 
                 // Teste de função da vetorização
                 let imagem = ctx.getImageData(0, 0, canvas.height, canvas.width);
                 let inputTensor = tf.browser.fromPixels(imagem);
                 inputTensor.toFloat();
                 inputTensor = inputTensor.div(val);
-                
-                tensores[i] = getModel(1, inputTensor);
-                
-                //console.log(`A imagem ${file.name} foi processada. Arquivo ${i} de ${arqvs.length}.`);
-                //inputTensor.print();
+                tensores[i] = inputTensor.dataSync();
             }
         }
         reader.readAsDataURL(file);
     }
     console.log(tensores);
+    setTimeout(function(){ download('tensores.json', JSON.stringify(tensores)) }, 2000);
+}
+
+async function saveTensor(tensor) {
+    Promise.resolve(tensor[0]).then(download('tensores.json', JSON.stringify(tensor)));
+}
+
+function download(filename, text) {
+    var pom = document.createElement('a');
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    pom.setAttribute('download', filename);
+
+    if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        pom.dispatchEvent(event);
+    }
+    else {
+        pom.click();
+    }
 }

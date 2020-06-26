@@ -30,3 +30,12 @@ function handleFiles() {
         reader.readAsDataURL(file);
     }
 }
+
+function previewImage(finalFile) {
+    // Cria um preview da imagem para teste
+    let img = document.createElement("img");  // Cria uma imagem
+    img.classList.add("obj");  // Define a classe como objeto
+    img.src = finalFile; // A imagem recebe o arquivo redimensionado
+    img.width = img.height = 224;
+    prev.appendChild(img);  // Adiciona um preview da imagem
+}
