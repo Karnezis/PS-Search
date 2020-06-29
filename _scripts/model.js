@@ -6,18 +6,11 @@ async function load_Models() {
     console.log('Modelos carregados.');
 }
 
-async function getModel(modelNum, image) {
+async function vggPredict(image) {
     const image_reshaped = image.reshape([-1, 224, 224, 3]);
-    switch (modelNum) {
-        case 1:
-            var psmodel = await tf.loadLayersModel('_models/pspotter/model.json');
-            return psmodel.predict(image_reshaped);
-            break;
-        case 2:
-            var vggmodel = await tf.loadLayersModel('_models/vgg16ft/model.json');
-            return vggmodel.predict(image_reshaped);
-            break;
-        default:
-            break;
-    }
+    var vggmodel = await tf.loadLayersModel('_models/vgg16ft/model.json');
+    var predict = vggmodel.predict(image_reshaped);
+    var promise = Promise.resolve(predict.data());
+    console.log(promise);
+    return promise;
 }
