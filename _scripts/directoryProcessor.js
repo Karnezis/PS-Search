@@ -4,7 +4,7 @@ acopla o nome do arquivo no tensor e faz um arquivo com todos os dados que é ba
 function processDict() {
     var arqvs = document.getElementById('dir').files; // Pega os arquivos do input
     const val = 255;
-    let tensores = [];
+    var tensores = [];
     let proms = [];
     //Atualizando a label de usuário para dizer que estamos processando.
     let lbl = document.querySelector('div#usrlbl');
@@ -76,4 +76,8 @@ function download(filename, text) {
     else {
         pom.click();
     }
+}
+
+function getTensores() {
+    return tensores;
 }

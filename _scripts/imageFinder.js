@@ -29,10 +29,10 @@ function buscar() {
                     tensor.name = file.name;  // Adiciona o nome do arquivo ao tensor
                     resolve(tensor);
                 }
-            )
+            );
             prom.then((tensor) => {
                 tf.print(tensor);
-            })
+            });
         }
     }
     reader.readAsDataURL(file);
