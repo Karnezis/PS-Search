@@ -24,3 +24,9 @@ footer{
 div{
     padding: 10px;
 }
+div.hidden {
+    display: none;
+}
+div.visible {
+    display: block;
+}
