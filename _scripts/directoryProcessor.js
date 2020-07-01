@@ -1,10 +1,10 @@
 /*  Pega todos os arquivos de um diretório, transforma em um tensor, prediz o tensor no modelo VGG,
 acopla o nome do arquivo no tensor e faz um arquivo com todos os dados que é baixado pelo usuário.
     */
+var tensores = [];
 function processDict() {
     var arqvs = document.getElementById('dir').files; // Pega os arquivos do input
     const val = 255;
-    var tensores = [];
     let proms = [];
     //Atualizando a label de usuário para dizer que estamos processando.
     let lbl = document.querySelector('div#usrlbl');
@@ -56,7 +56,7 @@ function processDict() {
             download('dataset.json', JSON.stringify(tensores));
             Promise.resolve('true');
             hideDirectory();    // Esconde os botões de processar diretório
-            createElements();   // Cria os elementos de buscar imagem
+            //createElements();   // Cria os elementos de buscar imagem
         }, function error(err) {
             window.getElementById('usrlbl').innerHTML = "<p>Não foi possível processar este diretório. Por favor, tente novamente.</p>";
         });

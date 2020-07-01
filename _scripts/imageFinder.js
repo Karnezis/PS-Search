@@ -1,24 +1,26 @@
 function buscar() {
+    //hideDirectory();
     const imageType = /image.*/;
     const val = 255;
-    var file = document.getElementById('img-srch').files[0];   // Pega o arquivo da imagem
-    if (!file.type.match(imageType)) { // Verifica se é uma imagem
-        window.alert(`O arquivo ${file.name} não é uma imagem válida.`);
+    let arq = document.getElementById('img-srch').files[0];   // Pega o arquivo da imagem
+    console.log(arq);
+    if (!arq.type.match(imageType)) { // Verifica se é uma imagem
+        window.alert(`O arquivo ${arq.name} não é uma imagem válida.`);
         return; // Se não for, retorna e espera outro upload.
     } else {
-        var fileType = file.type;
+        var fileTyp = arq.type;
     }
-    let reader = new FileReader();
-    reader.onloadend = function () {  // Quando tentar carregar uma imagem
+    let leitor = new FileReader();
+    leitor.onloadend = function () {  // Quando tentar carregar uma imagem
         let image = new Image();  // Faz um novo elemento da classe Imagem
-        image.src = reader.result;  // Pega a imagem do arquivo lido
+        image.src = leitor.result;  // Pega a imagem do arquivo lido
         image.onload = async function () {  // Quando carregamos a imagem com sucesso
             let canvas = document.createElement('canvas');  // Cria um Canvas
             canvas.width = 224;  // Define a altura do canvas como a desejada
             canvas.height = 224;  // Define a largura do canvas como a desejada
             let ctx = canvas.getContext("2d");  // Pega o contexto do Canvas
             ctx.drawImage(this, 0, 0, 224, 224);  // Desenha a imagem no contexto
-            canvas.toDataURL(fileType);  // O arquivo final é jogado no Canvas
+            canvas.toDataURL(fileTyp);  // O arquivo final é jogado no Canvas
 
             let imagem = ctx.getImageData(0, 0, canvas.height, canvas.width);  // Escreve a imagem num Canvas
             let inputTensor = tf.browser.fromPixels(imagem);  // Converte o conteúdo do Canvas para Tensor
@@ -26,16 +28,28 @@ function buscar() {
             let prom = new Promise(
                 async function (resolve, reject) {
                     var tensor = await vggPredict(inputTensor);  // Passa o tensor pelo modelo
-                    tensor.name = file.name;  // Adiciona o nome do arquivo ao tensor
+                    tensor.name = arq.name;  // Adiciona o nome do arquivo ao tensor
                     resolve(tensor);
                 }
             );
             prom.then((tensor) => {
-                tf.print(tensor);
+                let tensors = getTensores();
+                var similares = [];
+                let k = document.getElementById('setK').value;
+                tensors.forEach(element => {
+                    element.distance = tf.norm((tf.sub(tensor, element)), 'euclidean');
+                    console.log(`A distância é ${element.distance}.`);
+                    if (similares.length < k || element.distance < tensors[k-1]) {
+                        similares.splice((k-1), 1);
+                        similares.push(element);
+                        similares.sort(function(a, b){return a.distance < b.distance ? -1 : a.distance > b.distance ? 1 : 0;});
+                    }
+                });
+                console.log(similares);
             });
         }
     }
-    reader.readAsDataURL(file);
+    leitor.readAsDataURL(arq);
 }
 
 function hideDirectory() { // Esconde os botões de processar diretório
@@ -51,13 +65,20 @@ function createElements() { // Cria os elementos de buscar imagem
     srch.setAttribute('type', 'file');
     srch.setAttribute('id', 'img-srch');
     srch.setAttribute('accept', 'image/*');
-    let srchbttn = document.createElement('input');
+    //Adicionando o campo para escolher o número K
+    let setK = document.createElement('input');
+    setK.setAttribute('type', 'number');
+    setK.setAttribute('id', 'setK');
+    setK.setAttribute('min', '1');
     //Adicionando botão de buscar por arquivo.
+    let srchbttn = document.createElement('input');
     srchbttn.setAttribute('type', 'button')
     srchbttn.setAttribute('value', 'Buscar Imagem');
     srchbttn.setAttribute('id', 'img-bttn');
     srchbttn.setAttribute('onclick', 'buscar()');
     search.appendChild(srch);
+    search.innerHTML += '<br><br> Defina o número de resultados: ';
+    search.appendChild(setK);
     search.innerHTML += '<br><br>';
     search.appendChild(srchbttn);
 }
