@@ -1,5 +1,4 @@
 function buscar() {
-    //hideDirectory();
     const imageType = /image.*/;
     const val = 255;
     let arq = document.getElementById('img-srch').files[0];   // Pega o arquivo da imagem
@@ -28,7 +27,7 @@ function buscar() {
             let prom = new Promise(
                 async function (resolve, reject) {
                     var tensor = await vggPredict(inputTensor);  // Passa o tensor pelo modelo
-                    tensor.name = arq.name;  // Adiciona o nome do arquivo ao tensor
+                    tensor.name = leitor.result;  // Adiciona o nome do arquivo ao tensor
                     resolve(tensor);
                 }
             );
@@ -45,7 +44,9 @@ function buscar() {
                         similares.sort(function(a, b){return a.distance < b.distance ? -1 : a.distance > b.distance ? 1 : 0;});
                     }
                 });
-                console.log(similares);
+                hideElements();
+                populate(similares);
+                /*window.location.replace('result.html');*/
             });
         }
     }
@@ -58,6 +59,8 @@ function hideDirectory() { // Esconde os botões de processar diretório
 }
 
 function createElements() { // Cria os elementos de buscar imagem
+    let lbl = document.querySelector('div#usrlbl');
+    lbl.innerHTML = `<p>Escolha a imagem que deseja buscar por similaridade.</p>`;
     //Acha a div com o id 'file-div'
     let search = document.querySelector('div#file-div');
     //Cria o botão onde o usuário irá escolher a imagem desejada
@@ -81,4 +84,9 @@ function createElements() { // Cria os elementos de buscar imagem
     search.appendChild(setK);
     search.innerHTML += '<br><br>';
     search.appendChild(srchbttn);
+}
+
+function hideElements() {
+    let search = document.querySelector('div#file-div');
+    search.classList.add('hidden');
 }
