@@ -29,7 +29,7 @@ function processDict() {
                 reader.onloadend = function () {  // Quando tentar carregar uma imagem
                     let image = new Image();  // Faz um novo elemento da classe Imagem
                     image.src = reader.result;  // Pega a imagem do arquivo lido
-                    image.onload = async function () {  // Quando carregamos a imagem com sucesso
+                    image.onload = async function (e) {  // Quando carregamos a imagem com sucesso
                         let canvas = document.createElement('canvas');  // Cria um Canvas
                         canvas.width = 224;  // Define a altura do canvas como a desejada
                         canvas.height = 224;  // Define a largura do canvas como a desejada
@@ -44,6 +44,8 @@ function processDict() {
                         tensores[i] = await vggPredict(inputTensor);
                         //console.log(tensores[i].toString());
                         tensores[i].name = file.name;
+                        console.log(file.name);
+                        tensores[i].src = reader.result;
                         resolve(tensores[i]);
                     }
                 }
@@ -62,6 +64,8 @@ function processDict() {
         });
     }, 5000);
 }
+
+
 
 function download(filename, text) {
     var pom = document.createElement('a');

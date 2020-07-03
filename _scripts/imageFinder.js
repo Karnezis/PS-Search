@@ -38,7 +38,7 @@ function buscar() {
                 tensors.forEach(element => {
                     element.distance = tf.norm((tf.sub(tensor, element)), 'euclidean');
                     console.log(`A distância é ${element.distance}.`);
-                    if (similares.length < k || element.distance < tensors[k-1]) {
+                    if (similares.length < k || element.distance < similares[k-1].distance) {
                         similares.splice((k-1), 1);
                         similares.push(element);
                         similares.sort(function(a, b){return a.distance < b.distance ? -1 : a.distance > b.distance ? 1 : 0;});

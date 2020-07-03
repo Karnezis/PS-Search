@@ -31,39 +31,36 @@ div.visible {
     display: block;
 }
 ul#albumfotos {
-    width: 700px;
+    width: 900px;
     margin: 0 auto;
-    padding: 50px;
+    padding: 20px;
     overflow: hidden;
-    list-style: none;
 }
-ul#albumfotos li {
-    float: left;
-    width: 200px;
-    height: 200px;
-    margin: 10px;
-    border: 5px solid white;
-    background-color: white;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, .4);
+ul#albumfotos figure{
+    padding: 5px;
+    display: inline-block;
+    margin: 0px;
 }
-ul#albumfotos li:hover span {
+ul#albumfotos figure:hover figcaption {
     opacity: 1;
 }
-ul#albumfotos li span {
+ul#albumfotos figure figcaption {
+    margin: 5px 0 0 0;
     opacity: 0;
     color: white;
     text-shadow: 1px 1px 1px black;
     background-color: rgba(0, 0, 0, .3);
     font-size: 9pt;
-    line-height: 370px;
     padding: 5px;
 }
-ul#albumfotos li.foto {
-    background-position: 50% 50%;
-    background-size: 224px 224px;
-    background-color: white;
+ul#albumfotos figure img {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    border: 5px solid white;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .4);
 }
-ul#albumfotos li.foto:hover {
+ul#albumfotos figure img:hover {
     background-position: 0px 0px;
     background-size: 200px 200px;
 }
