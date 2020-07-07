@@ -103,3 +103,7 @@ function download(filename, text) {
 function getTensores() {
     return tensores;
 }
+
+function setTensores(tensoresJSON) {
+    tensores = tensoresJSON;
+}

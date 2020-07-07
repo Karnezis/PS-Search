@@ -14,6 +14,7 @@
     <script src="_scripts/directoryProcessor.js"></script>
     <script src="_scripts/imageFinder.js"></script>
     <script src="_scripts/populateGallery.js"></script>
+    <script src="_scripts/datasetReader.js"></script>
 </head>
 
 <body>
@@ -22,13 +23,16 @@
     </header>
     <section>
         <div id="usrlbl">
-            <p>Bem-vindo ao PathoSpotter-Search <br>
-                Por favor, selecione o seu diretório.
+            <p>Bem-vindo ao PathoSpotter-Search. <br>
+                Para começar, selecione o seu diretório.
             </p>
         </div>
         <div id="dir-div">
             <input type="file" name="dirsel" id="dir" webkitdirectory directory multiple /><br><br>
-            <input type="button" value="Processar Diretório" onclick="processDict()" accept="image/*">
+            <input type="button" value="Processar Diretório" onclick="processDict()" accept="image/*"><br><br>
+            <p>Caso já tenha processado um diretório <br> anteriormente, utilize-o abaixo.</p>
+            <input type="file" name="datasel" id="data" accept="application/JSON" /><br><br>
+            <input type="button" value="Usar Diretório" onclick="readDict()">
         </div>
         <div id="progress-div" class="hidden">
             <progress value="0" max="100" id="prog-bar"></progress><br><br>
