@@ -52,25 +52,43 @@ function processDict() {
                 reader.readAsDataURL(file);
             });
     }
-    setTimeout(() => {
-        let promise = Promise.all(proms);
-        promise.then(() => {
-            download('dataset.json', JSON.stringify(tensores));
-            Promise.resolve('true');
-            hideDirectory();    // Esconde os botões de processar diretório
-            createElements();   // Cria os elementos de buscar imagem
-        }, function error(err) {
-            window.getElementById('usrlbl').innerHTML = "<p>Não foi possível processar este diretório. Por favor, tente novamente.</p>";
+    hideDirectory();    // Esconde os botões de processar diretório
+    let prog = document.querySelector('div#progress-div');  // Localiza a div da barra de progresso.
+    prog.classList.remove('hidden');  // Deixa a barra de progresso visível.
+    progressPromise(proms, update).then(function (results) {  // Quando todas as promessas forem feitas.
+        download('dataset.json', JSON.stringify(tensores));  // Baixa os tensores.
+        prog.classList.add('hidden');  // Esconde novamente a barra de progresso.
+        createElements();   // Cria os elementos de buscar imagem
+    });
+}
+
+function update(completed, total) {
+    var progressEl = document.querySelector('progress#prog-bar'); // Pega a barra de progresso.
+    var valueEl = document.querySelector('span#prog-span');  // Pega o span de progresso.
+    progressEl.value = Math.round(completed / total * 100);  // Atualiza a barra.
+    valueEl.innerHTML = 'Foram processadas ' + completed + ' imagens de ' + total + '.';  // Atualiza o span.
+}
+
+function progressPromise(promises, tickCallback) {
+    var len = promises.length;  // Total de promessas.
+    var progress = 0;  // Progresso até agora.
+
+    function tick(promise) {  // Recebe a promessa e adiciona um callback.
+        promise.then(function () {  // Callback para atualizar o progresso.
+            progress++;
+            tickCallback(progress, len);
         });
-    }, 5000);
+        return promise;
+    }
+
+    return Promise.all(promises.map(tick));  // Retorna as promessas mapeadas com os novos callbacks.
 }
 
 
-
 function download(filename, text) {
-    var pom = document.createElement('a');
-    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    pom.setAttribute('download', filename);
+    var pom = document.createElement('a');  // Cria um elemento a.
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));  // Cria um blob.
+    pom.setAttribute('download', filename);  // Atribui download a blob.
 
     if (document.createEvent) {
         var event = document.createEvent('MouseEvents');

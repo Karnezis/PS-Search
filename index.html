@@ -30,6 +30,10 @@
             <input type="file" name="dirsel" id="dir" webkitdirectory directory multiple /><br><br>
             <input type="button" value="Processar Diretório" onclick="processDict()" accept="image/*">
         </div>
+        <div id="progress-div" class="hidden">
+            <progress value="0" max="100" id="prog-bar"></progress><br><br>
+            <span id="prog-span">Assim que a primeira imagem for processada,<br>você poderá acompanhar o progresso por aqui.</span>
+        </div>
         <div id="file-div">
         </div>
         <div id="galeria">

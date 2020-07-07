@@ -3,6 +3,21 @@ body{
     font: normal 12pt courier;
     text-align: center;
 }
+span {
+    font: normal 12pt courier;
+    text-align: center;
+}
+progress {
+    width: 500px;
+    border: none;
+    padding: 3px;
+    height: 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+    color: #2dabe1;
+}
+progress::-webkit-progress-value { background: #2dabe1; }
+progress::-moz-progress-bar { background: #2dabe1; }
 header{
     color: black;
     text-align: center;

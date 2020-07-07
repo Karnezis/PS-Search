@@ -46,7 +46,6 @@ function buscar() {
                 });
                 hideElements();
                 populate(similares);
-                /*window.location.replace('result.html');*/
             });
         }
     }
