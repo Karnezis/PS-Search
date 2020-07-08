@@ -4,6 +4,6 @@ async function vggPredict(image) {
     let vggmodel = await tf.loadLayersModel('_models/vgg16ft/model.json');
     let predict = vggmodel.predict(image_reshaped);
     let promise = Promise.resolve(predict.data());
-    console.log(promise);
+    //console.log(promise);
     return promise;
 }

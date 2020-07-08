@@ -4,27 +4,33 @@ function readDict() {
 
     fr.onload = function (e) {
         let result = JSON.parse(e.target.result);
+        //console.log(result);
         let formatted = JSON.stringify(result, null, 2);
-        createTensorArray(formatted);
+        //console.log(formatted);
+        createTensorArray(result);
     }
     fr.readAsText(data);
 }
 
 function createTensorArray(jsonArray) {
-    var novoArray = [];
-    let auxArray = [];
-    auxArray = JSON.parse(jsonArray);
-    console.log(auxArray);
+    let auxArray = jsonArray.map(el=>Object.values(el));
+    let novoArray = [];
+    //console.log(auxArray);
     auxArray.forEach(element => {
-        delete element['name'];
-        delete element['src'];
-        console.log(element);
-        let aux = Array.from(element);
-        console.log(aux);
-        let tensorJSON = tf.tensor1d(element).print();
+        //console.log(element);
+        let name = element[20];
+        let src = element[21];
+        element.splice(20, 2);
+        //let aux = Array.from(element.value);
+        //console.log(aux);
+        let tensorJSON = tf.tensor1d(element);
+        tensorJSON.name = name;
+        tensorJSON.src = src;
+        tensorJSON.print();
+        //console.log(tensorJSON.name);
         novoArray.push(tensorJSON);
     });
-    console.log(novoArray);
+    //console.log(novoArray);
     setTensores(novoArray);
     hideDirectory();
     createElements();

@@ -2,7 +2,7 @@ function buscar() {
     const imageType = /image.*/;
     const val = 255;
     let arq = document.getElementById('img-srch').files[0];   // Pega o arquivo da imagem
-    console.log(arq);
+    //console.log(arq);
     if (!arq.type.match(imageType)) { // Verifica se é uma imagem
         window.alert(`O arquivo ${arq.name} não é uma imagem válida.`);
         return; // Se não for, retorna e espera outro upload.
@@ -37,7 +37,7 @@ function buscar() {
                 let k = document.getElementById('setK').value;
                 tensors.forEach(element => {
                     element.distance = tf.norm((tf.sub(tensor, element)), 'euclidean');
-                    console.log(`A distância é ${element.distance}.`);
+                    //console.log(`A distância é ${element.distance}.`);
                     if (similares.length < k || element.distance < similares[k-1].distance) {
                         similares.splice((k-1), 1);
                         similares.push(element);
