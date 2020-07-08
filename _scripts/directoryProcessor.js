@@ -77,6 +77,7 @@ function progressPromise(promises, tickCallback) {
         promise.then(function () {  // Callback para atualizar o progresso.
             progress++;
             tickCallback(progress, len);
+            tf.disposeVariables();
         });
         return promise;
     }

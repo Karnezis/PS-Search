@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="_estilo/estilo.css">
     <!-- Importação do Tensorflow (Versão mais recente) -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    <script>
+        tf.ENV.set('WEBGL_CONV_IM2COL', false);
+    </script>
     <!-- Importa o Script responsável por carregar os modelos -->
-    <script async src="_scripts/modelDealer.js" onload="load_Models()"></script>
+    <script async src="_scripts/modelDealer.js""></script>
     <!-- Funções de botões e disparidades -->
     <script src="_scripts/directoryProcessor.js"></script>
     <script src="_scripts/imageFinder.js"></script>
@@ -47,7 +50,7 @@
         </div>
     </section>
     <footer>
-        <p>&copy; Laboratório de Computação de Alto Desempenho</p>
+        <p>Copyright &copy; 2020. <b>Laboratório de Computação de Alto Desempenho</b>. Todos os direitos reservados.</p>
     </footer>
 </body>
 

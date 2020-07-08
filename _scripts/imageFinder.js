@@ -72,6 +72,7 @@ function createElements() { // Cria os elementos de buscar imagem
     setK.setAttribute('type', 'number');
     setK.setAttribute('id', 'setK');
     setK.setAttribute('min', '1');
+    setK.setAttribute('value', '10');
     //Adicionando botão de buscar por arquivo.
     let srchbttn = document.createElement('input');
     srchbttn.setAttribute('type', 'button')
