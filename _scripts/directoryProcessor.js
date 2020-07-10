@@ -2,7 +2,7 @@
 acopla o nome do arquivo no tensor e faz um arquivo com todos os dados que é baixado pelo usuário.
     */
 var tensores = [];
-function processDict() {
+async function processDict() {
     var arqvs = document.getElementById('dir').files; // Pega os arquivos do input
     const val = 255;
     let proms = [];
@@ -12,19 +12,23 @@ function processDict() {
 
     //Fazer processamento e barra de progresso.
 
+    hideDirectory();    // Esconde os botões de processar diretório
+    let prog = document.querySelector('div#progress-div');  // Localiza a div da barra de progresso.
+    prog.classList.remove('hidden');  // Deixa a barra de progresso visível.
+
     for (let i = 0; i < arqvs.length; i++) { // Itera a FileList
         let file = arqvs[i]; // Recebe um único File da lista
         const imageType = /image.*/;
 
         if (!file.type.match(imageType)) { // Verifica se é uma imagem
             window.alert(`O arquivo ${file.name} não é uma imagem válida.`);
-            continue; // Se não for, pula o redimensionamento.
+            return; // Se não for, pula o redimensionamento.
         } else {
             var fileType = file.type;
         }
 
         let reader = new FileReader();  // Redimensionando a Imagem
-        proms[i] = new Promise(
+        proms[i] = await new Promise(
             async function (resolve, reject) {
                 reader.onloadend = function () {  // Quando tentar carregar uma imagem
                     let image = new Image();  // Faz um novo elemento da classe Imagem
@@ -44,21 +48,20 @@ function processDict() {
                         tensores[i] = await vggPredict(inputTensor);
                         //console.log(tensores[i].toString());
                         tensores[i].name = file.name;
-                        console.log(file.name);
+                        console.log(tensores[i]);
                         tensores[i].src = reader.result;
                         resolve(tensores[i]);
+                        tf.disposeVariables();
                     }
                 }
                 reader.readAsDataURL(file);
             });
     }
-    hideDirectory();    // Esconde os botões de processar diretório
-    let prog = document.querySelector('div#progress-div');  // Localiza a div da barra de progresso.
-    prog.classList.remove('hidden');  // Deixa a barra de progresso visível.
-    progressPromise(proms, update).then(function (results) {  // Quando todas as promessas forem feitas.
+    Promise.all(proms).then(function (results) {  // Quando todas as promessas forem feitas.
         download('dataset.json', JSON.stringify(tensores));  // Baixa os tensores.
         prog.classList.add('hidden');  // Esconde novamente a barra de progresso.
         createElements();   // Cria os elementos de buscar imagem
+
     });
 }
 
@@ -107,4 +110,36 @@ function getTensores() {
 
 function setTensores(tensoresJSON) {
     tensores = tensoresJSON;
+}
+
+function resizeAndFilter(file) {
+    let reader = new FileReader();  // Redimensionando a Imagem
+    prom = new Promise(
+        async function (resolve, reject) {
+            reader.onloadend = function () {  // Quando tentar carregar uma imagem
+                let image = new Image();  // Faz um novo elemento da classe Imagem
+                image.src = reader.result;  // Pega a imagem do arquivo lido
+                image.onload = async function (e) {  // Quando carregamos a imagem com sucesso
+                    let canvas = document.createElement('canvas');  // Cria um Canvas
+                    canvas.width = 224;  // Define a altura do canvas como a desejada
+                    canvas.height = 224;  // Define a largura do canvas como a desejada
+                    let ctx = canvas.getContext("2d");  // Pega o contexto do Canvas
+                    ctx.drawImage(this, 0, 0, 224, 224);  // Desenha a imagem no contexto
+                    canvas.toDataURL(fileType);  // O arquivo final é jogado no Canvas
+
+                    // Teste de função da vetorização
+                    let imagem = ctx.getImageData(0, 0, canvas.height, canvas.width);
+                    let inputTensor = tf.browser.fromPixels(imagem);
+                    inputTensor = inputTensor.toFloat().div(val);
+                    tensores[i] = await vggPredict(inputTensor);
+                    //console.log(tensores[i].toString());
+                    tensores[i].name = file.name;
+                    console.log(file.name);
+                    tensores[i].src = reader.result;
+                    resolve(tensores[i]);
+                }
+            }
+            reader.readAsDataURL(file);
+        });
+
 }
