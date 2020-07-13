@@ -15,6 +15,7 @@ async function processDict() {
     hideDirectory();    // Esconde os botões de processar diretório
     let prog = document.querySelector('div#progress-div');  // Localiza a div da barra de progresso.
     prog.classList.remove('hidden');  // Deixa a barra de progresso visível.
+    let actProg = 0;
 
     for (let i = 0; i < arqvs.length; i++) { // Itera a FileList
         let file = arqvs[i]; // Recebe um único File da lista
@@ -48,14 +49,16 @@ async function processDict() {
                         tensores[i] = await vggPredict(inputTensor);
                         //console.log(tensores[i].toString());
                         tensores[i].name = file.name;
-                        console.log(tensores[i]);
+                        console.log(tensores[i].name);
                         tensores[i].src = reader.result;
                         resolve(tensores[i]);
                         tf.disposeVariables();
                     }
                 }
                 reader.readAsDataURL(file);
-            });
+            }).then(
+                update((actProg++), arqvs.length)
+            );
     }
     Promise.all(proms).then(function (results) {  // Quando todas as promessas forem feitas.
         download('dataset.json', JSON.stringify(tensores));  // Baixa os tensores.
@@ -71,23 +74,6 @@ function update(completed, total) {
     progressEl.value = Math.round(completed / total * 100);  // Atualiza a barra.
     valueEl.innerHTML = 'Foram processadas ' + completed + ' imagens de ' + total + '.';  // Atualiza o span.
 }
-
-function progressPromise(promises, tickCallback) {
-    var len = promises.length;  // Total de promessas.
-    var progress = 0;  // Progresso até agora.
-
-    function tick(promise) {  // Recebe a promessa e adiciona um callback.
-        promise.then(function () {  // Callback para atualizar o progresso.
-            progress++;
-            tickCallback(progress, len);
-            tf.disposeVariables();
-        });
-        return promise;
-    }
-
-    return Promise.all(promises.map(tick));  // Retorna as promessas mapeadas com os novos callbacks.
-}
-
 
 function download(filename, text) {
     var pom = document.createElement('a');  // Cria um elemento a.
@@ -110,36 +96,4 @@ function getTensores() {
 
 function setTensores(tensoresJSON) {
     tensores = tensoresJSON;
-}
-
-function resizeAndFilter(file) {
-    let reader = new FileReader();  // Redimensionando a Imagem
-    prom = new Promise(
-        async function (resolve, reject) {
-            reader.onloadend = function () {  // Quando tentar carregar uma imagem
-                let image = new Image();  // Faz um novo elemento da classe Imagem
-                image.src = reader.result;  // Pega a imagem do arquivo lido
-                image.onload = async function (e) {  // Quando carregamos a imagem com sucesso
-                    let canvas = document.createElement('canvas');  // Cria um Canvas
-                    canvas.width = 224;  // Define a altura do canvas como a desejada
-                    canvas.height = 224;  // Define a largura do canvas como a desejada
-                    let ctx = canvas.getContext("2d");  // Pega o contexto do Canvas
-                    ctx.drawImage(this, 0, 0, 224, 224);  // Desenha a imagem no contexto
-                    canvas.toDataURL(fileType);  // O arquivo final é jogado no Canvas
-
-                    // Teste de função da vetorização
-                    let imagem = ctx.getImageData(0, 0, canvas.height, canvas.width);
-                    let inputTensor = tf.browser.fromPixels(imagem);
-                    inputTensor = inputTensor.toFloat().div(val);
-                    tensores[i] = await vggPredict(inputTensor);
-                    //console.log(tensores[i].toString());
-                    tensores[i].name = file.name;
-                    console.log(file.name);
-                    tensores[i].src = reader.result;
-                    resolve(tensores[i]);
-                }
-            }
-            reader.readAsDataURL(file);
-        });
-
 }
