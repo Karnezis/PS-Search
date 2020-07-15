@@ -1,12 +1,25 @@
-body{
+body {
     background: white;
     font: normal 12pt courier;
     text-align: center;
 }
+
 span {
     font: normal 12pt courier;
     text-align: center;
 }
+
+.float-container {
+    padding: 10px;
+}
+
+.float-child {
+    width: 44%;
+    float: left;
+    padding: 10px;
+    border: 2px dotted #AE0000;
+}
+
 progress {
     width: 500px;
     border: none;
@@ -16,13 +29,21 @@ progress {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
     color: #2dabe1;
 }
-progress::-webkit-progress-value { background: #2dabe1; }
-progress::-moz-progress-bar { background: #2dabe1; }
-header{
+
+progress::-webkit-progress-value {
+    background: #2dabe1;
+}
+
+progress::-moz-progress-bar {
+    background: #2dabe1;
+}
+
+header {
     color: black;
     text-align: center;
 }
-section{
+
+section {
     background: whitesmoke;
     border-radius: 10px;
     padding: 10px;
@@ -30,35 +51,43 @@ section{
     margin: auto;
     box-shadow: 5px 5px 5px grey;
 }
-footer{
+
+footer {
     color: black;
     text-align: center;
     font-style: italic;
     font-size: 8pt;
 }
-div{
+
+div {
     padding: 10px;
 }
+
 div.hidden {
     display: none;
 }
+
 div.visible {
     display: block;
 }
+
 ul#albumfotos {
     width: 900px;
     margin: 0 auto;
     padding: 20px;
     overflow: hidden;
 }
-ul#albumfotos figure{
+
+ul#albumfotos figure {
     padding: 5px;
     display: inline-block;
     margin: 0px;
 }
+
 ul#albumfotos figure:hover figcaption {
     opacity: 1;
 }
+
 ul#albumfotos figure figcaption {
     margin: 5px 0 0 0;
     opacity: 0;
@@ -68,6 +97,7 @@ ul#albumfotos figure figcaption {
     font-size: 9pt;
     padding: 5px;
 }
+
 ul#albumfotos figure img {
     width: 200px;
     height: 200px;
@@ -75,6 +105,7 @@ ul#albumfotos figure img {
     border: 5px solid white;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, .4);
 }
+
 ul#albumfotos figure img:hover {
     background-position: 0px 0px;
     background-size: 200px 200px;

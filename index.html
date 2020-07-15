@@ -12,7 +12,7 @@
         tf.ENV.set('WEBGL_CONV_IM2COL', false);
     </script>
     <!-- Importa o Script responsável por carregar os modelos -->
-    <script async src="_scripts/modelDealer.js""></script>
+    <script async src="_scripts/modelDealer.js"></script>
     <!-- Funções de botões e disparidades -->
     <script src="_scripts/directoryProcessor.js"></script>
     <script src="_scripts/imageFinder.js"></script>
@@ -26,16 +26,21 @@
     </header>
     <section>
         <div id="usrlbl">
-            <p>Bem-vindo ao PathoSpotter-Search. <br>
-                Para começar, selecione o seu diretório.
-            </p>
+            <p>Bem-vindo ao PathoSpotter-Search. <br> Escolha abaixo como deseja começar sua busca. </p>
         </div>
-        <div id="dir-div">
-            <input type="file" name="dirsel" id="dir" webkitdirectory directory multiple /><br><br>
-            <input type="button" value="Processar Diretório" onclick="processDict()" accept="image/*"><br><br>
-            <p>Caso já tenha processado um diretório <br> anteriormente, utilize-o abaixo.</p>
-            <input type="file" name="datasel" id="data" accept="application/JSON" /><br><br>
-            <input type="button" value="Usar Diretório" onclick="readDict()">
+        <div class="float-container">
+            <div id="dir-div">
+                <div class="float-child">
+                    <p>Escolha um diretório de imagens para que possamos analisá-lo. <br>A sua busca por imagens acontecerá neste diretório.</p>
+                    <input type="file" name="dirsel" id="dir" webkitdirectory directory multiple /><br><br>
+                    <input type="button" value="Analisar novo dataset" onclick="processDict()" accept="image/*">
+                </div>
+                <div class="float-child">
+                    <p>Se você já processou um diretório anteriormente, recebeu um arquivo. <br> Selecione-o na caixa abaixo para proceder.</p>
+                    <input type="file" name="datasel" id="data" accept="application/JSON" /><br><br>
+                    <input type="button" value="Usar dataset já analisado" onclick="readDict()">
+                </div>
+            </div>
         </div>
         <div id="progress-div" class="hidden">
             <progress value="0" max="100" id="prog-bar"></progress><br><br>
@@ -44,13 +49,14 @@
         <div id="file-div">
         </div>
         <div id="galeria">
-            <ul id="albumfotos"><!-- Modelo de Exibição de Imagem
+            <ul id="albumfotos">
+                <!-- Modelo de Exibição de Imagem
                 <li class="foto"><span>Legenda.</span></li>-->
             </ul>
         </div>
     </section>
     <footer>
-        <p>Copyright &copy; 2020. <b>Laboratório de Computação de Alto Desempenho</b>. Todos os direitos reservados.</p>
+        <p>Copyright &copy; 2020. <b>Projeto PathoSpotter</b>. Todos os direitos reservados.</p>
     </footer>
 </body>
 
