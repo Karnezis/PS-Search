@@ -1,8 +1,10 @@
 function readDict() {
+    let userLabel = document.querySelector('div#usrlbl');
+    userLabel.innerHTML = 'Estamos processando a sua busca. Por favor, aguarde.';
     let data = document.getElementById('data').files[0]; // Pega o arquivo JSON do input
     let fr = new FileReader();
 
-    fr.onload = function (e) {
+    fr.onload = function(e) {
         let result = JSON.parse(e.target.result);
         //console.log(result);
         let formatted = JSON.stringify(result, null, 2);
@@ -13,7 +15,7 @@ function readDict() {
 }
 
 function createTensorArray(jsonArray) {
-    let auxArray = jsonArray.map(el=>Object.values(el));
+    let auxArray = jsonArray.map(el => Object.values(el));
     let novoArray = [];
     //console.log(auxArray);
     auxArray.forEach(element => {
@@ -33,5 +35,6 @@ function createTensorArray(jsonArray) {
     //console.log(novoArray);
     setTensores(novoArray);
     hideDirectory();
-    createElements();
+    buscar();
+    //createElements();
 }

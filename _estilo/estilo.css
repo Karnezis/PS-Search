@@ -14,9 +14,9 @@ span {
 }
 
 .float-child {
-    width: 44%;
+    width: 45%;
     float: left;
-    padding: 10px;
+    padding: 5px;
     border: 2px dotted #AE0000;
 }
 
@@ -47,7 +47,7 @@ section {
     background: whitesmoke;
     border-radius: 10px;
     padding: 10px;
-    width: 900px;
+    width: 1100px;
     margin: auto;
     box-shadow: 5px 5px 5px grey;
 }
@@ -71,8 +71,15 @@ div.visible {
     display: block;
 }
 
+div#usrtutorial {
+    text-align: justify;
+    width: 90%;
+    float: left;
+    padding-left: 20px;
+}
+
 ul#albumfotos {
-    width: 900px;
+    width: 1000px;
     margin: 0 auto;
     padding: 20px;
     overflow: hidden;
@@ -84,13 +91,14 @@ ul#albumfotos figure {
     margin: 0px;
 }
 
-ul#albumfotos figure:hover figcaption {
+
+/*ul#albumfotos figure:hover figcaption {
     opacity: 1;
-}
+}*/
 
 ul#albumfotos figure figcaption {
     margin: 5px 0 0 0;
-    opacity: 0;
+    opacity: 1;
     color: white;
     text-shadow: 1px 1px 1px black;
     background-color: rgba(0, 0, 0, .3);

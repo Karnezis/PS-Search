@@ -65,11 +65,13 @@ async function processDict() {
     }
     Promise.all(proms).then(function(results) { // Quando todas as promessas forem feitas.
         let jsonName = prompt("Dê um nome ao arquivo do dataset processado.", "dataset");
+        if (!jsonName)
+            jsonName = 'dataset';
         jsonName = jsonName + '.json';
         download(jsonName, JSON.stringify(tensores)); // Baixa os tensores.
         prog.classList.add('hidden'); // Esconde novamente a barra de progresso.
-        createElements(); // Cria os elementos de buscar imagem
-
+        //createElements(); // Cria os elementos de buscar imagem
+        showDirectory();
     });
 }
 

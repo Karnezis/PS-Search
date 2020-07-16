@@ -26,27 +26,48 @@
     </header>
     <section>
         <div id="usrlbl">
-            <p>Bem-vindo ao PathoSpotter-Search. <br> Escolha abaixo como deseja começar sua busca. </p>
+            <p>Bem-vindo ao PathoSpotter-Search. <br> Escolha abaixo como deseja proceder com sua busca. <br> Em caso de dúvidas, sinta-se livre para recorrer ao tutorial logo abaixo. </p>
         </div>
         <div class="float-container">
             <div id="dir-div">
                 <div class="float-child">
-                    <p>Escolha um diretório de imagens para que possamos analisá-lo. <br>A sua busca por imagens acontecerá neste diretório.</p>
+                    <h2>Opção 1</h2>
+                    <p>Selecione o diretório com as imagens para processamento.</p>
                     <input type="file" name="dirsel" id="dir" webkitdirectory directory multiple /><br><br>
-                    <input type="button" value="Analisar novo dataset" onclick="processDict()" accept="image/*">
+                    <input type="button" value="Processar imagens" onclick="processDict()" accept="image/*"><br>
                 </div>
                 <div class="float-child">
-                    <p>Se você já processou um diretório anteriormente, recebeu um arquivo. <br> Selecione-o na caixa abaixo para proceder.</p>
-                    <input type="file" name="datasel" id="data" accept="application/JSON" /><br><br>
-                    <input type="button" value="Usar dataset já analisado" onclick="readDict()">
+                    <h2>Opção 2</h2>
+                    <p>Selecione o arquivo obtido na Opção 1 <br> (extensão .json).</p>
+                    <input type="file" name="datasel" id="data" accept="application/JSON" /><br>
+                    <p>Selecione a imagem a ser buscada.</p>
+                    <input type="file" name="imagesel" id="img-srch" accept="image/*"><br>
+                    <p>Defina o número de resultados:</p>
+                    <input type="number" name="ksel" id="setK" min="1" value="10"><br><br>
+                    <input type="button" value="Iniciar busca" onclick="readDict()"><br>
                 </div>
             </div>
+        </div>
+        <div id="usrtutorial">
+            <br><br>
+            <h2>Tutorial</h2>
+            <ul>
+                <li>Opção 1: <br>Na opção 1, o PathoSpotter-Search irá varrer o diretório indicado por você e processar todas as imagens dentro dele. Este processo poderá demorar de alguns minutos até horas, dependendo do tamanho do diretório que você escolher
+                    processar.
+                    <br> Ao final do processo, você receberá um arquivo que poderá utilizar na opção 2.
+                </li>
+                <li>Opção 2: <br>Na opção 2, você fornecerá o arquivo JSON obtido na opção 1, a imagem que deseja buscar e a quantidade de resultados que deseja obter. <br>Após alguns segundos, você receberá no máximo a quantidade de imagens definida no campo.
+                    Estas são ordenadas por similaridade a originalmente buscada.</li>
+                <li>Resultados: <br>Não possuímos nem pretendemos possuir acesso as imagens do seu computador. Desta forma, a única informação que você obterá nos resultados é a imagem, o seu nome e sua classificação em similaridade. Ambos serão descartados
+                    da memória do seu navegador assim que você atualizar ou sair da página.</li>
+            </ul>
         </div>
         <div id="progress-div" class="hidden">
             <progress value="0" max="100" id="prog-bar"></progress><br><br>
             <span id="prog-span">Assim que a primeira imagem for processada,<br>você poderá acompanhar o progresso por aqui.</span>
         </div>
         <div id="file-div">
+
         </div>
         <div id="galeria">
             <ul id="albumfotos">

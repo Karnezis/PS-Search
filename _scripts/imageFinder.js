@@ -1,7 +1,7 @@
 function buscar() {
     const imageType = /image.*/;
     const val = 255;
-    let arq = document.getElementById('img-srch').files[0];   // Pega o arquivo da imagem
+    let arq = document.getElementById('img-srch').files[0]; // Pega o arquivo da imagem
     //console.log(arq);
     if (!arq.type.match(imageType)) { // Verifica se é uma imagem
         window.alert(`O arquivo ${arq.name} não é uma imagem válida.`);
@@ -10,24 +10,24 @@ function buscar() {
         var fileTyp = arq.type;
     }
     let leitor = new FileReader();
-    leitor.onloadend = function () {  // Quando tentar carregar uma imagem
-        let image = new Image();  // Faz um novo elemento da classe Imagem
-        image.src = leitor.result;  // Pega a imagem do arquivo lido
-        image.onload = async function () {  // Quando carregamos a imagem com sucesso
-            let canvas = document.createElement('canvas');  // Cria um Canvas
-            canvas.width = 224;  // Define a altura do canvas como a desejada
-            canvas.height = 224;  // Define a largura do canvas como a desejada
-            let ctx = canvas.getContext("2d");  // Pega o contexto do Canvas
-            ctx.drawImage(this, 0, 0, 224, 224);  // Desenha a imagem no contexto
-            canvas.toDataURL(fileTyp);  // O arquivo final é jogado no Canvas
+    leitor.onloadend = function() { // Quando tentar carregar uma imagem
+        let image = new Image(); // Faz um novo elemento da classe Imagem
+        image.src = leitor.result; // Pega a imagem do arquivo lido
+        image.onload = async function() { // Quando carregamos a imagem com sucesso
+            let canvas = document.createElement('canvas'); // Cria um Canvas
+            canvas.width = 224; // Define a altura do canvas como a desejada
+            canvas.height = 224; // Define a largura do canvas como a desejada
+            let ctx = canvas.getContext("2d"); // Pega o contexto do Canvas
+            ctx.drawImage(this, 0, 0, 224, 224); // Desenha a imagem no contexto
+            canvas.toDataURL(fileTyp); // O arquivo final é jogado no Canvas
 
-            let imagem = ctx.getImageData(0, 0, canvas.height, canvas.width);  // Escreve a imagem num Canvas
-            let inputTensor = tf.browser.fromPixels(imagem);  // Converte o conteúdo do Canvas para Tensor
-            inputTensor = inputTensor.toFloat().div(val);  // Normaliza o vetor convertido
+            let imagem = ctx.getImageData(0, 0, canvas.height, canvas.width); // Escreve a imagem num Canvas
+            let inputTensor = tf.browser.fromPixels(imagem); // Converte o conteúdo do Canvas para Tensor
+            inputTensor = inputTensor.toFloat().div(val); // Normaliza o vetor convertido
             let prom = new Promise(
-                async function (resolve, reject) {
-                    var tensor = await vggPredict(inputTensor);  // Passa o tensor pelo modelo
-                    tensor.name = leitor.result;  // Adiciona o nome do arquivo ao tensor
+                async function(resolve, reject) {
+                    var tensor = await vggPredict(inputTensor); // Passa o tensor pelo modelo
+                    tensor.name = leitor.result; // Adiciona o nome do arquivo ao tensor
                     resolve(tensor);
                 }
             );
@@ -38,10 +38,10 @@ function buscar() {
                 tensors.forEach(element => {
                     element.distance = tf.norm((tf.sub(tensor, element)), 'euclidean');
                     //console.log(`A distância é ${element.distance}.`);
-                    if (similares.length < k || element.distance < similares[k-1].distance) {
-                        similares.splice((k-1), 1);
+                    if (similares.length < k || element.distance < similares[k - 1].distance) {
+                        similares.splice((k - 1), 1);
                         similares.push(element);
-                        similares.sort(function(a, b){return a.distance < b.distance ? -1 : a.distance > b.distance ? 1 : 0;});
+                        similares.sort(function(a, b) { return a.distance < b.distance ? -1 : a.distance > b.distance ? 1 : 0; });
                     }
                 });
                 hideElements();
@@ -55,6 +55,15 @@ function buscar() {
 function hideDirectory() { // Esconde os botões de processar diretório
     let dict = document.querySelector('div#dir-div');
     dict.classList.add('hidden');
+    let tutorial = document.querySelector('div#usrtutorial');
+    tutorial.classList.add('hidden');
+}
+
+function showDirectory() {
+    let dict = document.querySelector('div#dir-div');
+    dict.classList.remove('hidden');
+    let tutorial = document.querySelector('div#usrtutorial');
+    tutorial.classList.remove('hidden');
 }
 
 function createElements() { // Cria os elementos de buscar imagem
