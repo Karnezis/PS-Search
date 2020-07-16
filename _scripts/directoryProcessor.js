@@ -8,7 +8,7 @@ async function processDict() {
     let proms = [];
     //Atualizando a label de usuário para dizer que estamos processando.
     let lbl = document.querySelector('div#usrlbl');
-    lbl.innerHTML = `<p>Estamos processando o seu diretório. <br>Ao final desta operação, você receberá um arquivo para reutilizá-lo depois.</p>`;
+    lbl.innerHTML = `<p>Estamos processando o seu diretório. <br>Ao final desta operação, você receberá um arquivo para utilizar em sua busca na Opção 2.</p>`;
 
     //Fazer processamento e barra de progresso.
 

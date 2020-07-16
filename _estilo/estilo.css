@@ -71,6 +71,14 @@ div.visible {
     display: block;
 }
 
+img.hidden {
+    display: none;
+}
+
+img.visible {
+    display: block;
+}
+
 div#usrtutorial {
     text-align: justify;
     width: 90%;
@@ -81,7 +89,7 @@ div#usrtutorial {
 ul#albumfotos {
     width: 1000px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0px;
     overflow: hidden;
 }
 
@@ -117,4 +125,8 @@ ul#albumfotos figure img {
 ul#albumfotos figure img:hover {
     background-position: 0px 0px;
     background-size: 200px 200px;
+}
+
+input[type=number] {
+    width: 40px;
 }

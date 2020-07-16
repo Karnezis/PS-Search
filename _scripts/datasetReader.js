@@ -7,7 +7,7 @@ function readDict() {
     fr.onload = function(e) {
         let result = JSON.parse(e.target.result);
         //console.log(result);
-        let formatted = JSON.stringify(result, null, 2);
+        //let formatted = JSON.stringify(result, null, 2);
         //console.log(formatted);
         createTensorArray(result);
     }
