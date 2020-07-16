@@ -14,10 +14,13 @@ span {
 }
 
 .float-child {
-    width: 45%;
-    float: left;
     padding: 5px;
     border: 2px dotted #AE0000;
+}
+
+input[type=button] {
+    padding: 5px;
+    margin-bottom: 15px;
 }
 
 progress {
