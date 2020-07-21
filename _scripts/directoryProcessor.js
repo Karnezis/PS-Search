@@ -3,6 +3,7 @@ acopla o nome do arquivo no tensor e faz um arquivo com todos os dados que é ba
     */
 var tensores = [];
 async function processDict() {
+    tf.dispose();
     var arqvs = document.getElementById('dir').files; // Pega os arquivos do input
     const val = 255;
     let proms = [];
@@ -33,6 +34,7 @@ async function processDict() {
         proms[i] = await new Promise(
             async function(resolve, reject) {
                 reader.onloadend = function() { // Quando tentar carregar uma imagem
+                    tf.engine().startScope();
                     let image = new Image(); // Faz um novo elemento da classe Imagem
                     image.src = reader.result; // Pega a imagem do arquivo lido
                     image.onload = async function(e) { // Quando carregamos a imagem com sucesso
@@ -54,6 +56,7 @@ async function processDict() {
                         tensores[i].src = reader.result;
                         resolve(tensores[i]);
                         tf.disposeVariables();
+                        tf.engine().endScope();
                     }
                 }
                 reader.readAsDataURL(file);
@@ -61,6 +64,7 @@ async function processDict() {
             let endTime = new Date();
             let progTime = endTime.getTime() - bgnTime.getTime();
             update((++actProg), progTime, arqvs.length);
+            tf.dispose();
         });
     }
     Promise.all(proms).then(function(results) { // Quando todas as promessas forem feitas.
