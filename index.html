@@ -27,7 +27,8 @@
     </header>
     <section>
         <div id="usrlbl">
-            <p>Bem-vindo ao PathoSpotter-Search. <br> Escolha abaixo como deseja proceder com sua busca. <br> Em caso de dúvidas, sinta-se livre para recorrer ao tutorial logo abaixo. </p>
+            <p>Bem-vindo ao PathoSpotter-Search.<br>
+               Escolha abaixo como deseja proceder com sua busca.</p>
         </div>
         <div class="float-container">
             <div id="dir-div">
@@ -54,14 +55,29 @@
             <br><br>
             <h2>Tutorial</h2>
             <ul>
-                <li>Opção 1: <br>Na opção 1, o PathoSpotter-Search irá varrer o diretório indicado por você e processar todas as imagens dentro dele. Este processo poderá demorar de alguns minutos até horas, dependendo do tamanho do diretório que você escolher
-                    processar.
-                    <br> Ao final do processo, você receberá um arquivo que poderá utilizar na opção 2.
+                <li>Opção 1:<br>O PathoSpotter-Search vai processar todas as imagens contidas no diretório indicado. Este processamento poderá demorar de 
+                    alguns minutos até horas, dependendo da capacidade do seu computador e da quantidade e tamanho das imagens no diretório.<br>
+                    Ao final do processo, será automaticamente gerado um arquivo que será requerido na opção 2. Esse arquivo contem informações referente às imagensdo diretório que
+                    foi selecionado, e só terá utilidade quando se quiser buscar imagens nesse diretório. Recomendamos que o nome seja alterado para se relacionar com o diretório
+                    das imagens para o qual foi gerado.                 
                 </li>
-                <li>Opção 2: <br>Na opção 2, você fornecerá o arquivo JSON obtido na opção 1, a imagem que deseja buscar e a quantidade de resultados que deseja obter. <br>Após alguns segundos, você receberá no máximo a quantidade de imagens definida no campo.
-                    Estas são ordenadas por similaridade a originalmente buscada.</li>
-                <li>Resultados: <br>Não possuímos nem pretendemos possuir acesso as imagens do seu computador. Desta forma, a única informação que você obterá nos resultados é a imagem, o seu nome e sua classificação em similaridade. Ambos serão descartados
-                    da memória do seu navegador assim que você atualizar ou sair da página.</li>
+                <li>Opção 2:<br>Primeiramente forneça o arquivo obtido na Opção 1. Após isso, forneça a imagem que 
+                    de referência para a busca de imagens similares, e a quantidade de resultados que deseja obter.<br>
+                    Após alguns segundos, você receberá a lista imagens do diretório, ordenadas por similaridade com a imagem de referência.
+                </li>
+                <li>Observação:<br>
+                    <ol type='i'> 
+                        <li>
+                            O processamento das imagens é feito no seu computador e nenhuma imagem é transferida para o servidor do PathoSpotter.
+                            Todas as informações do processamento, excetuando o arquivo que foi produzido na opção 1, ficam na memória do computador e
+                            serão descartadas assim que você atualizar ou sair da página.
+                        </li>
+                        <li>
+                            O arquivo gerado na opção só deve ser usado para busca nas imagens dentro do diretório que serviu de base para gerá-lo. Usá-lo para
+                            outro conjunto de imagens gerará resultados errados.
+                        </li>
+                    </ol>
+                </li>
             </ul>
         </div>
         <div id="progress-div" class="hidden">
