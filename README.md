@@ -1,14 +1,14 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/LACAD/pathospotterlabeller/">
+  <a href="https://github.com/Karnezis/PS-Search">
     <img src="_images/icon.png" alt="Logo" height="80">
   </a>
 
   <h3 align="center">PathoSpotter Search</h3>
 
   <p align="center">
-    PathoSpotter is a computational tool built to help pathologists. It can be hard for a physician to remember where he or she has seen similar cases to a specific one. This is the first version of a content-based retrieval web module that can retrieve digital images of glomerulus by their similarity. The project was then improved in a private repository and published. The final version of this project won the [Best Work Award of the Workshop of Works in Progress](https://www.inf.ufrgs.br/sibgrapi2021/awards.php#content).</p>
+    PathoSpotter is a computational tool built to help pathologists. It can be hard for a physician to remember where he or she has seen similar cases to a specific one. This is the first version of a content-based retrieval web module that can retrieve digital images of glomerulus by their similarity. The project was then improved in a private repository and published. The final version of this project won the <a href="https://www.inf.ufrgs.br/sibgrapi2021/awards.php#content">Best Work Award of the Workshop of Works in Progress</a>.</p>
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -53,7 +53,7 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/LACAD/pathospottersearch-js.git
+   git clone https://github.com/Karnezis/PS-Search.git
    ```
 2. In Visual Studio Code, simply add the Live Server extension in the market. Start it.
 
@@ -77,7 +77,7 @@ Contributions are what make the open source community such an amazing place to b
 
 Ellen C. Aguiar - chalegreaguiar@gmail.com  
 Ângelo A. Duarte - angeloduarte@uefs.br  
-Project Link: [here](https://github.com/LACAD/pathospottersearch-js).  
+Project Link: [here](https://github.com/Karnezis/PS-Search).  
 Online website with automatic deploy: [here](http://pathospotter.bahia.fiocruz.br/pathospottersearch).  
 
 <!--## Acknowledgements -->
