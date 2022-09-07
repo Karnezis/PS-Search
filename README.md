@@ -8,7 +8,7 @@
   <h3 align="center">PathoSpotter Search</h3>
 
   <p align="center">
-    PathoSpotter is a computational tool built to help pathologists. It can be hard for a physician to remember where he or she has seen similar cases to a specific one. This is the first version of a content-based retrieval web module that can retrieve digital images of glomerulus by their similarity. The project was then improved in a private repository and published. The final version of this project won the (Best Work Award of the Workshop of Works in Progress)[https://www.inf.ufrgs.br/sibgrapi2021/awards.php#content].</p>
+    PathoSpotter is a computational tool built to help pathologists. It can be hard for a physician to remember where he or she has seen similar cases to a specific one. This is the first version of a content-based retrieval web module that can retrieve digital images of glomerulus by their similarity. The project was then improved in a private repository and published. The final version of this project won the [Best Work Award of the Workshop of Works in Progress](https://www.inf.ufrgs.br/sibgrapi2021/awards.php#content).</p>
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
